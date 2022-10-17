@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">RGBColorPickerExample</string>
+    <string name="pick">Pick a color</string>
+</resources>
