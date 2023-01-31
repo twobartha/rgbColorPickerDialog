@@ -3,6 +3,7 @@ plugins {
     id 'kotlin-android'
     id 'maven-publish'
 }
+group = 'com.github.twobartha'
 
 android {
     compileSdk 31
