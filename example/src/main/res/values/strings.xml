@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">RGBColorPickerExample</string>
-    <string name="pick">Pick a color</string>
+    <string name="pick">Pick a color (RGB)</string>
+    <string name="pick_argb">Pick a color (ARGB)</string>
 </resources>

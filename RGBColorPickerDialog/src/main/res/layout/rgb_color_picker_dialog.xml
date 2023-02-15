@@ -6,6 +6,27 @@
     android:layout_height="match_parent">
 
     <TextView
+        android:id="@+id/alpha_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/seekBarA"
+        app:layout_constraintEnd_toEndOf="@+id/seekBarR"
+        app:layout_constraintStart_toStartOf="@+id/seekBarR" />
+
+    <SeekBar
+        android:id="@+id/seekBarA"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:max="255"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/label_a"
+        app:layout_constraintEnd_toStartOf="@+id/guideline3"
+        app:layout_constraintStart_toStartOf="@+id/guideline2" />
+
+    <TextView
         android:id="@+id/blue_value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -42,7 +63,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/label_r"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -52,24 +73,35 @@
         app:layout_constraintTop_toBottomOf="@+id/color_preview" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/label_g"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="@string/g"
         android:textSize="34sp"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/label_r" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/label_b"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="@string/b"
         android:textSize="34sp"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        app:layout_constraintTop_toBottomOf="@+id/label_g" />
+
+    <TextView
+        android:id="@+id/label_a"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/a"
+        android:textSize="34sp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toBottomOf="@+id/label_b" />
 
     <androidx.constraintlayout.widget.Barrier
         android:layout_width="wrap_content"
@@ -92,7 +124,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:max="255"
-        app:layout_constraintBottom_toBottomOf="@+id/textView"
+        app:layout_constraintBottom_toBottomOf="@+id/label_r"
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
         app:layout_constraintStart_toStartOf="@+id/guideline2" />
 
@@ -103,7 +135,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:max="255"
-        app:layout_constraintBottom_toBottomOf="@+id/textView4"
+        app:layout_constraintBottom_toBottomOf="@+id/label_g"
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
         app:layout_constraintStart_toStartOf="@+id/guideline2" />
 
@@ -114,7 +146,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:max="255"
-        app:layout_constraintBottom_toBottomOf="@+id/textView5"
+        app:layout_constraintBottom_toBottomOf="@+id/label_b"
         app:layout_constraintEnd_toStartOf="@+id/guideline3"
         app:layout_constraintStart_toStartOf="@+id/guideline2" />
 
