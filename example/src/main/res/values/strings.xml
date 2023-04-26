@@ -2,4 +2,6 @@
     <string name="app_name">RGBColorPickerExample</string>
     <string name="pick">Pick a color (RGB)</string>
     <string name="pick_argb">Pick a color (ARGB)</string>
+    <string name="pick_with_hsv">Pick a color (RGB and HSV)</string>
+    <string name="pick_argb_with_hsv">Pick a color (ARGB and HSV)</string>
 </resources>

@@ -19,33 +19,41 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         colorView = findViewById(R.id.view)
-
         colorView.setBackgroundColor(color)
-        findViewById<Button>(R.id.pickButton).setOnClickListener {
 
+        val dialogListener = object : RGBColorPickerDialog.Listener {
+            override fun onFinished(r: Int, g: Int, b: Int, a: Int) {
+                color = Color.argb(a, r, g, b)
+                colorView.setBackgroundColor(color)
+            }
+        }
+
+        findViewById<Button>(R.id.pickButton).setOnClickListener {
             // Call the dialog
             val dialog = RGBColorPickerDialog.create(color.red, color.green, color.blue)
-            val listener: RGBColorPickerDialog.Listener = object : RGBColorPickerDialog.Listener {
-                override fun onFinished(r: Int, g: Int, b: Int, a: Int) {
-                    color = Color.rgb(r, g, b)
-                    colorView.setBackgroundColor(color)
-                }
-            }
-
-            dialog.setOnFinishedListener(listener)
+            dialog.setOnFinishedListener(dialogListener)
             dialog.show(supportFragmentManager, "dialog")
         }
 
         findViewById<Button>(R.id.pickButton2).setOnClickListener {
-            val dialog = RGBColorPickerDialog.create(color.red, color.green, color.blue, color.alpha)
-            val listener: RGBColorPickerDialog.Listener = object : RGBColorPickerDialog.Listener {
-                override fun onFinished(r: Int, g: Int, b: Int, a: Int) {
-                    color = Color.argb(a, r, g, b)
-                    colorView.setBackgroundColor(color)
-                }
-            }
+            val dialog = RGBColorPickerDialog.create(
+                color.red, color.green, color.blue, color.alpha
+            )
+            dialog.setOnFinishedListener(dialogListener)
+            dialog.show(supportFragmentManager, "dialog")
+        }
 
-            dialog.setOnFinishedListener(listener)
+        findViewById<Button>(R.id.pickButton3).setOnClickListener {
+            val dialog = RGBColorPickerDialog.createWithHSV(color.red, color.green, color.blue)
+            dialog.setOnFinishedListener(dialogListener)
+            dialog.show(supportFragmentManager, "dialog")
+        }
+
+        findViewById<Button>(R.id.pickButton4).setOnClickListener {
+            val dialog = RGBColorPickerDialog.createWithHSV(
+                color.red, color.green, color.blue, color.alpha
+            )
+            dialog.setOnFinishedListener(dialogListener)
             dialog.show(supportFragmentManager, "dialog")
         }
 
