@@ -11,6 +11,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import app.web.knot3home.rgbColorPickerDialog.R
+import kotlin.math.roundToInt
 
 /**
  * Use the [RGBColorPickerDialog.create] or [RGBColorPickerDialog.createWithHSV] to
@@ -178,8 +179,7 @@ class RGBColorPickerDialog : DialogFragment() {
             val max = (r.coerceAtLeast(g.coerceAtLeast(b)))
             val min = (r.coerceAtMost(g.coerceAtMost(b)))
             v = (max / 2.55).toInt()
-            s = (v - min / 2.55).toInt()
-
+            s = (((max - min) / max.toDouble()) * 100.0).toInt()
             if(max != min){
                 h = max - min
                 h = when(min){
@@ -206,7 +206,7 @@ class RGBColorPickerDialog : DialogFragment() {
         }
 
         fun setRGBByHSV(){
-            val max = (v * 2.55).toInt()
+            val max = (v * 2.55).roundToInt()
             val min = (max - ((s / 100.toDouble()) * max)).toInt()
             when(h){
                 in 0 until 60 -> {
@@ -235,8 +235,8 @@ class RGBColorPickerDialog : DialogFragment() {
                     b = max
                 }
                 in 300 .. 360 -> {
-                    r = min
-                    g = max
+                    r = max
+                    g = min
                     b = (((360 - h) / 60.0) * (max - min) + min).toInt()
                 }
             }
