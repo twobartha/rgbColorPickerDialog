@@ -6,7 +6,7 @@ plugins {
 group = 'com.github.twobartha'
 
 android {
-    namespace 'app.web.knot3home.rgbColorPickerDialog'
+    namespace = 'app.web.knot3home.rgbColorPickerDialog'
     compileSdk 31
 
     defaultConfig {
@@ -27,11 +27,21 @@ android {
         sourceCompatibility JavaVersion.VERSION_11
         targetCompatibility JavaVersion.VERSION_11
     }
-    kotlinOptions {
-        jvmTarget = '11'
+    buildFeatures {
+        buildConfig = true
     }
     publishing {
         singleVariant('release')
+    }
+    lint {
+        // This AAR is not a Play app; the consuming app controls its target SDK.
+        warning 'ExpiredTargetSdkVersion'
+    }
+}
+
+kotlin {
+    compilerOptions {
+        jvmTarget = org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_11
     }
 }
 

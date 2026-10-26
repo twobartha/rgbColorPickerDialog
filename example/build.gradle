@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace 'app.web.knot3home.rgbColorPickerExample'
+    namespace = 'app.web.knot3home.rgbColorPickerExample'
     compileSdk 31
 
     defaultConfig {
@@ -27,8 +27,18 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-    kotlinOptions {
-        jvmTarget = '1.8'
+    buildFeatures {
+        buildConfig = true
+    }
+    lint {
+        // This sample is not published to Play. Keep targetSdk 31 intentionally.
+        warning 'ExpiredTargetSdkVersion'
+    }
+}
+
+kotlin {
+    compilerOptions {
+        jvmTarget = org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_1_8
     }
 }
 
