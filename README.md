@@ -81,9 +81,28 @@ On Windows, use `gradlew.bat` with the same tasks. Outputs include:
 - Sample: `example/build/outputs/apk/debug/example-debug.apk`
 - Lint: each module's `build/reports/lint-results-debug.html`
 
-There are currently no unit or instrumentation test sources. Unit-test tasks
-therefore report `NO-SOURCE`; this is not a passing behavioral test suite. Build
-and lint checks do not replace testing the dialog on a device or emulator.
+The library has local JVM tests using JUnit 4 and Robolectric 4.17. They run
+against Android API 26 and 35 with JDK 17, without an emulator. The first run
+downloads Robolectric's Android runtime artifacts, so it requires network access.
+API 36 is not included in this test matrix because its Robolectric runtime
+requires JDK 21; the project's build JDK remains 17.
+
+Run just the library tests with:
+
+```sh
+bash ./gradlew :RGBColorPickerDialog:testDebugUnitTest
+```
+
+The report is at
+`RGBColorPickerDialog/build/reports/tests/testDebugUnitTest/index.html`.
+Tests cover factory input validation and endpoints, optional controls, RGB/HSV
+conversion and slider synchronization, alpha and preview updates, and listener
+behavior on confirmation, cancellation, dismissal, and replacement. They also
+guard against feeding programmatic slider updates back into the selected color.
+
+The sample still has no unit tests (`NO-SOURCE`), and there are no instrumentation
+tests. The local tests do not verify real touch gestures, rendering, or restoration
+after activity/process recreation; device or emulator testing is still needed.
 
 To generate the release AAR, POM, and Gradle module metadata and install them in
 the local Maven repository:
@@ -101,7 +120,11 @@ publication does not verify a hosted JitPack build or publish a remote release.
 
 - The `create` / `createWithHSV` overloads and `Listener` API are unchanged,
   as are the Kotlin package and resource namespace (including capitalization).
-  The dialog implementation and its own resources have not been changed.
+  The dialog's own resources are unchanged. The regression tests exposed a
+  floating-point rounding error in HSV-to-RGB conversion: V=50 and V=90 could
+  round the maximum channel down to 127 and 229 instead of 128 and 230. The
+  calculation now scales by 255 before dividing by 100; these color results are
+  intentionally corrected without changing the public API.
 - Consumers of the updated artifact should use compile SDK 36 or higher and a
   Kotlin compiler capable of reading Kotlin 2.3 metadata. Kotlin 2.3.21 with
   the toolchain above is the verified configuration; old Kotlin 1.6 builds are

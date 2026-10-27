@@ -37,6 +37,9 @@ android {
         // This AAR is not a Play app; the consuming app controls its target SDK.
         warning 'ExpiredTargetSdkVersion'
     }
+    testOptions {
+        unitTests.includeAndroidResources = true
+    }
 }
 
 kotlin {
@@ -51,6 +54,7 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.2.1'
     implementation 'com.google.android.material:material:1.13.0'
     testImplementation 'junit:junit:4.13.2'
+    testImplementation 'org.robolectric:robolectric:4.17'
     androidTestImplementation 'androidx.test.ext:junit:1.3.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.7.0'
 }
