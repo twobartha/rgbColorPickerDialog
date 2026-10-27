@@ -206,7 +206,7 @@ class RGBColorPickerDialog : DialogFragment() {
         }
 
         fun setRGBByHSV(){
-            val max = (v * 2.55).roundToInt()
+            val max = (v * 255.0 / 100.0).roundToInt()
             val min = (max - ((s / 100.toDouble()) * max)).toInt()
             when(h){
                 in 0 until 60 -> {
